@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Quote {
     private Long id;
     private String text;
-    private BigInteger likes;
+    private Long likes;
     private Doer doer;
 
     @Id
@@ -39,11 +39,11 @@ public class Quote {
 
     @Basic
     @Column(name = "likes")
-    public BigInteger getLikes() {
+    public Long getLikes() {
         return likes;
     }
 
-    public void setLikes(BigInteger likes) {
+    public void setLikes(Long likes) {
         this.likes = likes;
     }
 

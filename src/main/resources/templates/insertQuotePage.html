@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InsertPage</title>
+
+    <script src="jquery.js"></script>
+
+    <script src="Doer.js"></script>
+
+</head>
+<body>
+<datalist id="quote-datalist"></datalist>
+<datalist id="doerInsert-datalist"></datalist>
+<div>
+    <a href="/mainPage"> <img src="home2.png" style="margin-bottom: 20px;"></a>
+</div>
+<div>
+    <form name="addTempDoersAndQuotes" action="addTempDoersAndQuotes" method="POST">
+        <table>
+            <tr>
+                <th><p>Фамилия</p></th>
+                <th> <input  id="doerInsertSearch" name="chars" type="text" autocomplete="off" list="doerInsert-datalist" onkeyup="charsSurname()"></th>
+
+            </tr>
+
+            <tr>
+                <th><p>Имя</p></th>
+                <th><input style="border: 3px #00B344 solid" name="charsName" type="text" autocomplete="off"></th>
+            </tr>
+
+            <tr>
+                <th> <p>Текст</p> </th>
+                <th><input id="quoteSearch" name="charsQuote" type="text" autocomplete="off" placeholder="начните ввод" list="quote-datalist" onkeyup="charsQuoteBySurname()"></th>
+            </tr>
+
+
+        </table>
+        <input type="submit" value="Сохранить">
+    </form>
+    <span th:text="${doerResult}"/>
+</div>
+</body>
+</html>

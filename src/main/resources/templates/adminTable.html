@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="style.css">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="cssDesing.css"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="margin">
+<style>
+    .margin {
+        margin: 0;
+        padding: 0;
+        background-color: burlywood;
+        border-radius: 1px 1px 1px 1px;
+        border-color: rgb(172, 107, 23);
+        font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    }
+
+</style>
+
+<style>
+    .center{
+        Display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+</style>
+
+<div class="center">
+    <span th:text="${completeAutowired}"/>
+</div>
+<table>
+    <tr>
+        <th th:text="${name}"></th>
+
+        <th th:text="${quote}"></th>
+    </tr>
+    <div>
+        <a href="/mainPage"> <img src="home2.png"> </a>
+    </div>
+
+    <tr th:each="doersAndQuote : ${resultBySelectAdminAutowired}">
+     <td><a th:text="${doersAndQuote.doerName + ' ' + doersAndQuote.doerSurname}"></a></td>
+        <td th:text="${doersAndQuote.quote}"></td>
+        <td> <a th:href="@{/addDoerAndQuote(doerName=${(doersAndQuote.doerName)},doerSurname=${(doersAndQuote.doerSurname)},idRecord=${(doersAndQuote.id)},textQuote=${(doersAndQuote.quote)})}">  добавить </a><td>
+        <td> <a th:href="@{/deleteRecordFromTempTable(idRecord=${(doersAndQuote.id)})}">  удалить </a><td>
+    </tr>
+</table>
+
+
+</body>
+</html>

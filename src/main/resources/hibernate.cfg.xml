@@ -6,8 +6,11 @@
   <session-factory>
     <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
     <property name="connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.globally_quoted_identifiers">true</property>
     <mapping class="com.example.doer.doer2.model.Doer"/>
     <mapping class="com.example.doer.doer2.model.Quote"/>
+    <mapping class="com.example.doer.doer2.model.Admin"/>
+    <mapping class="com.example.doer.doer2.model.TempDoersAndQuotesTable"/>
     <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Test Doer</title>
+
+    <script src="jquery.js"></script>
+
+    <script src="Doer.js"></script>
+
+
+</head>
+
+<style>
+    .margin {
+        margin: 0;
+        padding: 0;
+        background-color: burlywood;
+        border-radius: 1px 1px 1px 1px;
+        border-color: rgb(172, 107, 23);
+        font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    }
+
+</style>
+
+<style>
+    .center{
+        Display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+
+<body class="margin" link="white" alink="white" vlink="white">
+
+<div>
+    <a href="/mainPage"><img src="home2.png"> </a>
+</div>
+<form name="formSearchQuote" action="formSearchQuote" method="POST" class="center">
+    <label for="quoteSearch" style="padding-right: 10px">Поиск Цитаты  </label>
+
+    <input id="quoteSearch" name="chars" type="text" autocomplete="off" placeholder="начните ввод" list="quote-datalist"
+           onkeyup="charsQuote()">
+
+    <button type="submit"><img src="findButton.png" alt="искать"
+                               style="vertical-align: middle">Искать
+    </button>
+</form>
+
+
+<datalist id="quote-datalist"></datalist>
+
+
+
+<table style="padding-left: 40px">
+    <tr>
+        <th th:text="${nameFirstLineInSearchQuote}"></th>
+
+        <th th:text="${quoteNameFirstLineInSearchQuote}"></th>
+    </tr>
+
+    <tr th:each="searchResult : ${searchResult}">
+        <td><a th:href="@{/quotesDoerByFindQuote(id=${searchResult.getDoer.getId})}"
+               th:text="${searchResult.getDoer.getName + ' ' + searchResult.getDoer.getSurname()}"></a></td>
+        <td th:text="${searchResult.getText}">
+
+        </td>
+    </tr>
+</table>
+
+<div class="center">
+    <a href="/insertQuote" >Добавить цитату</a>
+</div>
+</div>
+
+<div class="center">
+    <a href="/autowiredAdmin">Авторизоваться</a>
+</div>
+
+</body>
+</html>

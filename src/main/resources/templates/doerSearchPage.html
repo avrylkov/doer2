@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Doer</title>
+
+    <script src="jquery.js"></script>
+
+    <script src="Doer.js"></script>
+</head>
+<style>
+    .margin {
+        margin: 0;
+        padding: 0;
+        background-color: burlywood;
+        border-radius: 1px 1px 1px 1px;
+        border-color: rgb(172, 107, 23);
+        font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    }
+
+</style>
+
+<style>
+    .center{
+        Display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<body  class="margin" link="white" alink="white" vlink="white">
+
+<datalist id="doer-datalist"></datalist>
+<div>
+    <a href="/mainPage"> <img src="home2.png" style="margin-bottom: 20px;"></a>
+</div>
+<form name="formSearchDoer" action="formSearchDoer" method="POST" class="center">
+    <label for="doerSearch">Поиск деятеля</label>
+
+    <input id="doerSearch" name="chars" type="text" autocomplete="off" placeholder="начните ввод" list="doer-datalist"
+           onkeyup="charsByPerson()">
+
+    <button type="submit">Искать</button>
+
+   <!-- <p>можно вводить<em>одну букву, несколько, полное имя</em></p>-->
+</form>
+
+<ul>
+    <li th:each="doer: ${doersSearchResult}">
+        <a th:href="@{/quotesDoer(idDoer=${doer.id})}"  th:utext="${doer.name} + ' ' + ${doer.surname}">
+            <form name="likeDoer" action="likeDoer" method="post">
+                <button type="submit"> <img src="find_search.png" alt="оценить">
+                </button>
+            </form>
+        </a>
+
+    </li>
+</ul>
+
+<div class="center">
+    <a href="/insertQuote" >Добавить цитату</a>
+</div>
+</div>
+
+<div class="center">
+    <a href="/autowiredAdmin">Авторизоваться</a>
+</div>
+
+</body>
+</html>

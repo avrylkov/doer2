@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>autowiredAdminPage</title>
+</head>
+<body>
+<div>
+    <a href="/mainPage"><img src="home2.png"> </a>
+</div>
+<form name="Autowired" action="Autowired" method="POST">
+    <table>
+        <tr>
+            <th><p>Логин</p></th>
+            <th> <input name="login" type="text" autocomplete="off"></th>
+
+        </tr>
+
+        <tr>
+            <th><p>Пароль</p></th>
+            <th><input name="password" type="text" autocomplete="off"></th>
+        </tr>
+    </table>
+    <input type="submit" value="Авторизоваться">
+</form>
+</body>
+</html>

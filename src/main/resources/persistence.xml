@@ -1,0 +1,4 @@
+<property
+        name="hibernate.globally_quoted_identifiers"
+        value="true"
+/>
