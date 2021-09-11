@@ -170,11 +170,16 @@ public class Controller {
 
     @RequestMapping(value = "/formSearchDoer", method = RequestMethod.POST)
     public String findDoerSql(@RequestParam(name = "chars") String chars, Model model) {
-        String[] s = chars.split(" ", 2);
-        if(s.length == 2){
-            List<Doer> doerByNameAndSurnameFullCompliance = doerRepository.getDoerByNameAndSurnameFullCompliance(s[0], s[1]);
-            fillingPageDoer(doerByNameAndSurnameFullCompliance.get(0).getId(),model);
-            return "pageDoer";
+        String[] s = chars.split(" ");
+        if(s.length >= 2){
+            List<Doer> doerByNameAndSurnameFullCompliance = doerRepository.getDoerByNameAndSurnameFullCompliance(s[1], s[0]);
+            if(!doerByNameAndSurnameFullCompliance.isEmpty()) {
+                fillingPageDoer(doerByNameAndSurnameFullCompliance.get(0).getId(), model);
+                return "pageDoer";
+            }else
+            {
+                return "doerSearchPage";
+            }
         }else {
             List<Doer> doers = doSearchDoers(chars);
             model.addAttribute("doersSearchResult", doers);

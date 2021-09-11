@@ -10,14 +10,33 @@
     <script src="Doer.js"></script>
 
 </head>
-<body>
+<style>
+    .margin {
+        margin: 0;
+        padding: 0;
+        background-color: burlywood;
+        border-radius: 1px 1px 1px 1px;
+        border-color: rgb(172, 107, 23);
+        font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    }
+
+</style>
+
+<style>
+    .center{
+        Display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<body class="margin">
 <datalist id="quote-datalist"></datalist>
 <datalist id="doerInsert-datalist"></datalist>
 <div>
     <a href="/mainPage"> <img src="home2.png" style="margin-bottom: 20px;"></a>
 </div>
-<div>
-    <form name="addTempDoersAndQuotes" action="addTempDoersAndQuotes" method="POST">
+<div class="center">
+    <form name="addTempDoersAndQuotes" action="addTempDoersAndQuotes" method="POST" >
         <table>
             <tr>
                 <th><p>Фамилия</p></th>
@@ -27,7 +46,7 @@
 
             <tr>
                 <th><p>Имя</p></th>
-                <th><input style="border: 3px #00B344 solid" name="charsName" type="text" autocomplete="off"></th>
+                <th><input name="charsName" type="text" autocomplete="off"></th>
             </tr>
 
             <tr>
@@ -35,11 +54,11 @@
                 <th><input id="quoteSearch" name="charsQuote" type="text" autocomplete="off" placeholder="начните ввод" list="quote-datalist" onkeyup="charsQuoteBySurname()"></th>
             </tr>
 
-
         </table>
-        <input type="submit" value="Сохранить">
+        <input type="submit" value="Сохранить" class="center" style="margin-left: 120px;">
     </form>
-    <span th:text="${doerResult}"/>
+
+    <span th:text="${doerResult}" class="center" style="margin-left: 120px;"/>
 </div>
 </body>
 </html>
