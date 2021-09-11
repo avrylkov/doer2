@@ -44,7 +44,7 @@ public class Controller {
     public String findQuote(Model model) {
         List<Quote> quotes = quoteRepository.getAllQuotes();
         List<Quote> sortedQuotes = quotes.stream().sorted((o1, o2) -> {
-            Long i = o1.getLikes() - o2.getLikes();
+            Long i = o2.getLikes() - o1.getLikes();
             String s = i.toString();
             Integer g = Integer.parseInt(s);
             return g;
