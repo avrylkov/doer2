@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
 
-    <title>Test Doer</title>
+    <title>Quote page</title>
 
     <script src="jquery.js"></script>
 
@@ -11,6 +11,31 @@
 
 
 </head>
+
+<style>
+
+    .btn-grad {
+        background-image: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%)
+    }
+    .btn-grad {
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 100%;
+        color: white;
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+    }
+    .btn-grad:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+    }
+
+</style>
 
 <style>
     .margin {
@@ -25,6 +50,14 @@
 </style>
 
 <style>
+    .gradientBack{
+
+        background: no-repeat linear-gradient( 65.9deg,  rgba(85,228,224,1) 5.5%, rgba(75,68,224,0.74) 54.2%, rgba(64,198,238,1) 55.2%, rgba(177,36,224,1) 98.4% );
+        background-size: 3000px 3000px;
+    }
+</style>
+
+<style>
     .center{
         Display: flex;
         justify-content: center;
@@ -33,7 +66,8 @@
 </style>
 
 
-<body class="margin" link="white" alink="white" vlink="white">
+<body  link="white" alink="white" vlink="white" class="gradientBack">
+
 
 <div>
     <a href="/mainPage"><img src="home2.png"> </a>
@@ -44,7 +78,7 @@
     <input id="quoteSearch" name="chars" type="text" autocomplete="off" placeholder="начните ввод" list="quote-datalist"
            onkeyup="charsQuote()">
 
-    <button type="submit"><img src="findButton.png" alt="искать"
+    <button type="submit" ><img src="findButton.png" alt="искать"
                                style="vertical-align: middle">Искать
     </button>
 </form>

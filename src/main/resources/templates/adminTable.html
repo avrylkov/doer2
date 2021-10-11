@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body class="margin">
+
 <style>
     .margin {
         margin: 0;
@@ -29,7 +29,16 @@
     }
 </style>
 
-<div class="center">
+<style>
+    .gradientBack{
+
+        background: no-repeat linear-gradient( 65.9deg,  rgba(85,228,224,1) 5.5%, rgba(75,68,224,0.74) 54.2%, rgba(64,198,238,1) 55.2%, rgba(177,36,224,1) 98.4% );
+        background-size: 1920px 1080px;
+    }
+</style>
+
+<body class="gradientBack">
+<div class="center,gradientBack">
     <span th:text="${completeAutowired}"/>
 </div>
 <table>
