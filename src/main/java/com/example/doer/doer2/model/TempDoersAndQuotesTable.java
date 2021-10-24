@@ -10,6 +10,7 @@ public class TempDoersAndQuotesTable {
     private String doerName;
     private String doerSurname;
     private String quote;
+    private  String link;
 
     @Basic
     @Id
@@ -64,6 +65,16 @@ public class TempDoersAndQuotesTable {
 
     public void setQuote(String quote) {
         this.quote = quote;
+    }
+
+    @Basic
+    @Column(name = "link")
+    public String getLinkDoer() {
+        return link;
+    }
+
+    public void setLinkDoer(String linkDoer) {
+        this.link = linkDoer;
     }
 
     @Override

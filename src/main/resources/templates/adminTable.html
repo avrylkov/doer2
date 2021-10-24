@@ -21,7 +21,7 @@
 </style>
 
 <style>
-    .center{
+    .center {
         Display: flex;
         justify-content: center;
         align-items: center;
@@ -30,9 +30,9 @@
 </style>
 
 <style>
-    .gradientBack{
+    .gradientBack {
 
-        background: no-repeat linear-gradient( 65.9deg,  rgba(85,228,224,1) 5.5%, rgba(75,68,224,0.74) 54.2%, rgba(64,198,238,1) 55.2%, rgba(177,36,224,1) 98.4% );
+        background: no-repeat linear-gradient(65.9deg, rgba(85, 228, 224, 1) 5.5%, rgba(75, 68, 224, 0.74) 54.2%, rgba(64, 198, 238, 1) 55.2%, rgba(177, 36, 224, 1) 98.4%);
         background-size: 1920px 1080px;
     }
 </style>
@@ -41,24 +41,67 @@
 <div class="center,gradientBack">
     <span th:text="${completeAutowired}"/>
 </div>
-<table>
-    <tr>
-        <th th:text="${name}"></th>
+<div>
+    <a href="/mainPage"> <img src="home2.png"> </a>
+</div>
 
-        <th th:text="${quote}"></th>
-    </tr>
-    <div>
-        <a href="/mainPage"> <img src="home2.png"> </a>
-    </div>
+<form th:each="doersAndQuote : ${resultBySelectAdminAutowired}" name="addDoersAndQuotes" action="addDoersAndQuotes"
+      method="POST">
+    <table>
 
-    <tr th:each="doersAndQuote : ${resultBySelectAdminAutowired}">
-     <td><a th:text="${doersAndQuote.doerName + ' ' + doersAndQuote.doerSurname}"></a></td>
-        <td th:text="${doersAndQuote.quote}"></td>
-        <td> <a th:href="@{/addDoerAndQuote(doerName=${(doersAndQuote.doerName)},doerSurname=${(doersAndQuote.doerSurname)},idRecord=${(doersAndQuote.id)},textQuote=${(doersAndQuote.quote)})}">  добавить </a><td>
-        <td> <a th:href="@{/deleteRecordFromTempTable(idRecord=${(doersAndQuote.id)})}">  удалить </a><td>
-    </tr>
-</table>
+        <td>
+             <span style="display:inline-block">
+            <label for=name style="display:block">Имя</label>
+            <input class="w3-input" type="text" th:value="${doersAndQuote.doerName}" name="name" id="name">
+             </span>
+        </td>
+
+        <td>
+             <span style="display:inline-block">
+            <label for=surName style="display:block">Фамилия</label>
+            <input class="w3-input" type="text" th:value="${doersAndQuote.doerSurname}" name="surName" id="surName">
+             </span>
+        </td>
 
 
+        <td>
+            <span style="display:inline-block">
+            <label for=quote style="display:block">Цитата</label>
+            <input class="w3-input" type="text" th:value="${doersAndQuote.quote}" name="quote" id="quote">
+            </span>
+        </td>
+
+        <td>
+            <span style="display:inline-block">
+            <label for=linkDoer style="display:block">Ссылка</label>
+            <input class="w3-input" type="text" th:value="${doersAndQuote.linkDoer}" name="linkDoer" id="linkDoer">
+            </span>
+        </td>
+
+
+        <td>
+            <span style="display:inline-block">
+            <label for=tempId style="display:block">Временный id</label>
+            <input th:value="${doersAndQuote.id}" name="tempId" id="tempId">
+            </span>
+        </td>
+
+        <td>
+            <div style="margin-top: 20px">
+                <input type="submit" value="Сохранить">
+            </div>
+
+        </td>
+
+        <td>
+           <div style="margin-top: 15px">
+            <a th:href="@{/deleteRecordFromTempTable(idRecord=${(doersAndQuote.id)})}"> удалить </a>
+           </div>
+        </td>
+
+    </table>
+</form>
 </body>
 </html>
+
+<!--th:href="@{/addDoerAndQuote(doerName=${(doersAndQuote.doerName)},doerSurname=${(doersAndQuote.doerSurname)},idRecord=${(doersAndQuote.id)},textQuote=${(doersAndQuote.quote)},linkDoer = ${(doersAndQuote.linkDoer)})}"-->

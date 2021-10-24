@@ -13,6 +13,7 @@ public class Doer {
     private String surname;
     private String name;
     private Long likes;
+    private String link;
     private Set<Quote> quotes = new HashSet<>();
 
 
@@ -76,6 +77,17 @@ public class Doer {
     @Override
     public int hashCode() {
         return Objects.hash(id, surname, name, likes);
+    }
+
+
+    @Basic
+    @Column(name = "link")
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     @OneToMany(mappedBy = "doer")

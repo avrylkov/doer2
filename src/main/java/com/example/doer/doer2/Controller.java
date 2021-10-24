@@ -114,9 +114,15 @@ public class Controller {
         String name = doer.getName();
         String surname = doer.getSurname();
         Set<Quote> quotesDoer = doer.getQuotes();
+        List<Quote> sortedQuotes = quotesDoer.stream().sorted((o1, o2) -> {
+            Long i = o2.getLikes() - o1.getLikes();
+            String s = i.toString();
+            Integer g = Integer.parseInt(s);
+            return g;
+        }).collect(Collectors.toList());
 
         model.addAttribute("name", name + " " + surname);
-        model.addAttribute("quotesDoer", quotesDoer);
+        model.addAttribute("quotesDoer", sortedQuotes);
     }
 
     @RequestMapping(value = "likesQuote", method = RequestMethod.GET)
@@ -138,7 +144,9 @@ public class Controller {
             List<TempDoersAndQuotesTable> allRecords = tempDoersAndQuotesInAdminTableRepository.getAllTempDoersAndQuotes();
             model.addAttribute("name","имя");
             model.addAttribute("quote","цитата");
-            model.addAttribute("resultBySelectAdminAutowired",allRecords);
+            if(allRecords != null) {
+                model.addAttribute("resultBySelectAdminAutowired", allRecords);
+            }
             model.addAttribute("completeAutowired", "успешно");
 
         } else {
@@ -227,14 +235,64 @@ public class Controller {
     public String addTempDoersAndQuotes(@RequestParam(name = "chars") String doerSurname,
                                         @RequestParam(name = "charsName") String doerName,
                                         @RequestParam(name = "charsQuote") String charsQuote,
+                                        @RequestParam(name = "linkDoer") String linkDoer,
                                         Model model) {
         TempDoersAndQuotesTable newRecord = new TempDoersAndQuotesTable();
         newRecord.setDoerName(doerName);
         newRecord.setDoerSurname(doerSurname);
         newRecord.setQuote(charsQuote);
+        newRecord.setLinkDoer(linkDoer);
         tempDoersAndQuotesInAdminTableRepository.save(newRecord);
         model.addAttribute("doerResult", "отправлено на проверку");
         return "insertQuotePage";
+    }
+
+    @RequestMapping(value = "addDoersAndQuotes",method = RequestMethod.POST)
+    public String addDoersAndQuotes(@RequestParam(name = "name") String name,
+                                    @RequestParam(name = "surName") String surName,
+                                    @RequestParam(name = "quote") String quote,
+                                    @RequestParam(name = "linkDoer") String link,
+                                    @RequestParam(name = "tempId") Long tempId,
+                                    Model model){
+        List<Doer> doersContainsSurnameAndName = doerRepository.getDoerByNameAndSurnameFullCompliance(name, surName);
+        if (doersContainsSurnameAndName.isEmpty()) {
+            //добавление нового писателя с цитатой
+            Doer newDoer = new Doer();
+            newDoer.setName(name);
+            newDoer.setSurname(surName);
+            newDoer.setLikes(0L);
+            newDoer.setLink(link);
+
+            Quote newQuote = new Quote();
+            newQuote.setDoer(newDoer);
+            newQuote.setText(quote);
+            newQuote.setLikes(0L);
+
+            newDoer.getQuotes().add(newQuote);
+
+            doerRepository.save(newDoer);
+            quoteRepository.save(newQuote);
+
+            tempDoersAndQuotesInAdminTableRepository.deleteById(tempId);
+
+        } else if (!doersContainsSurnameAndName.isEmpty()) {
+            //добавление только цитаты
+            Doer doer = doersContainsSurnameAndName.get(0);
+
+            Quote newQuote = new Quote();
+            newQuote.setDoer(doer);
+            newQuote.setText(quote);
+            newQuote.setLikes(0L);
+
+            doer.getQuotes().add(newQuote);
+
+            doerRepository.save(doer);
+            quoteRepository.save(newQuote);
+
+            tempDoersAndQuotesInAdminTableRepository.deleteById(tempId);
+
+        }
+        return "adminTable";
     }
 
 
@@ -243,6 +301,7 @@ public class Controller {
                                   @RequestParam(name = "doerSurname") String doerName,
                                   @RequestParam(name = "idRecord") Long idRecord,
                                   @RequestParam(name = "textQuote") String charsQuote,
+                                  @RequestParam(name = "linkDoer") String linkDoer,
                                   Model model) {
         List<Doer> doersContainsSurnameAndName = doerRepository.getDoerByNameAndSurnameFullCompliance(doerSurname, doerName);
         if (doersContainsSurnameAndName.isEmpty()) {
@@ -251,6 +310,7 @@ public class Controller {
             newDoer.setName(doerName);
             newDoer.setSurname(doerSurname);
             newDoer.setLikes(0L);
+             newDoer.setLink(linkDoer);
 
             Quote newQuote = new Quote();
             newQuote.setDoer(newDoer);
@@ -285,8 +345,15 @@ public class Controller {
     }
 
     @RequestMapping(value = "/deleteRecordFromTempTable",method = RequestMethod.GET)
-    public String deleteRecordFromTempTable(@RequestParam(name = "idRecord") Long id){
+    public String deleteRecordFromTempTable(@RequestParam(name = "idRecord") Long id,Model model){
         tempDoersAndQuotesInAdminTableRepository.deleteById(id);
+        List<TempDoersAndQuotesTable> allRecords = tempDoersAndQuotesInAdminTableRepository.getAllTempDoersAndQuotes();
+        model.addAttribute("name","имя");
+        model.addAttribute("quote","цитата");
+        if(allRecords != null) {
+            model.addAttribute("resultBySelectAdminAutowired", allRecords);
+        }
+        model.addAttribute("completeAutowired", "успешно");
         return "adminTable";
     }
 

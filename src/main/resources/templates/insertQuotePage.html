@@ -49,19 +49,26 @@
         <table>
             <tr>
                 <th><p>Фамилия</p></th>
-                <th> <input  id="doerInsertSearch" name="chars" type="text" autocomplete="off" list="doerInsert-datalist" onkeyup="charsSurname()"></th>
+                <th> <input  id="doerInsertSearch" name="chars" type="text" autocomplete="off" list="doerInsert-datalist" onkeyup="charsSurname()"  placeholder="Имя"></th>
 
             </tr>
 
             <tr>
                 <th><p>Имя</p></th>
-                <th><input name="charsName" type="text" autocomplete="off"></th>
+                <th><input name="charsName" type="text" autocomplete="off"  placeholder="Фамилия"></th>
             </tr>
 
             <tr>
                 <th> <p>Текст</p> </th>
-                <th><input id="quoteSearch" name="charsQuote" type="text" autocomplete="off" placeholder="начните ввод" list="quote-datalist" onkeyup="charsQuoteBySurname()"></th>
+                <th><input id="quoteSearch" name="charsQuote" type="text" autocomplete="off" placeholder="Текст цитаты" list="quote-datalist" onkeyup="charsQuoteBySurname()"></th>
             </tr>
+
+            <tr>
+                <th> <p>Ссылка на автора</p> </th>
+                <th><input id="linkDoer" name="linkDoer" type="text" autocomplete="off" placeholder="Ссылка на автора(необязательно)"></th>
+            </tr>
+
+
 
         </table>
         <input type="submit" value="Сохранить" class="center" style="margin-left: 120px;">
